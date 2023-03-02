@@ -1,0 +1,36 @@
+{% extends "./index.html" %}
+{% block content %}<div class="list-group" id='mails_list'></div>{% endblock %}
+{% block script %}
+    <script>
+
+  const copy = document.querySelector('#copy')
+  copy.addEventListener('click', (e) => {
+    e.preventDefault()
+    const email = document.querySelector('#email')
+    navigator.clipboard.writeText(email.value)
+    console.log(email.value)
+  })
+
+  async function getMessages() {
+    let url = '{{request.build_absolute_uri}}/getMessages/';
+    let response = await fetch(url).then(async res => {
+      data = await res.json()
+      const mailList = document.querySelector('#mails_list')
+      mailList.innerHTML = ''
+      for (const d of data) {
+        const template = document.querySelector('#mail')
+        const clone = template.content.cloneNode(true)
+        const link = clone.querySelector('#link')
+        const header = clone.querySelector('#header')
+        const date = clone.querySelector('#date')
+        const text = clone.querySelector('#text')
+        header.innerHTML = d['from']
+        link.href = `{{request.build_absolute_uri}}/getMessage/${d['id']}`
+        date.innerHTML = d['date']
+        mailList.appendChild(clone)
+      }
+    });
+  }
+  setInterval(getMessages, 2000)
+    </script>
+{% endblock %}

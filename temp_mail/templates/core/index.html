@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temp-MAIL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</head>
+
+<style>
+  body {
+    background-color: #212529;
+  }
+
+  .parent {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+  }
+
+  .block {
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -250px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border: none;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  form {
+    position: relative;
+    margin: 1em;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+    border-radius: 1.5em;
+    border: 1px solid;
+    padding: 0 1.5em;
+  }
+
+  button {
+    position: absolute;
+    top: .4em;
+    right: .4em;
+    height: 2.2em;
+    border-radius: 1.1em;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+</style>
+
+<body>
+
+  <div class="parent">
+    <div class="block">
+      <h3 class='text-light' style='text-align: center;'>Сервис временной почты</h3>
+
+      <form action="">
+        <input type="text" name="" id="email" value='{{login}}@{{domain}}' class='form-control'
+          placeholder="Ваша ссылка" readonly>
+        <button type="submit" id='copy' class='btn btn-primary'>Скопировать</button>
+      </form>
+
+      {% block content %}
+
+      {% endblock %}
+
+
+    </div>
+  </div>
+
+  <template id='mail'>
+    <a href="" class="list-group-item list-group-item-action flex-column align-items-start" id='link'>
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1" id='header'></h5>
+        <small class="text-muted" id='date'></small>
+      </div>
+      <p class="mb-1" id='text'></p>
+    </a>
+  </template>
+
+
+</body>
+
+
+{% block script %}
+
+{% endblock %}
+
+</html>

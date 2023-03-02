@@ -1,0 +1,17 @@
+{% extends "./index.html" %}
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% else %}
+        <div class="list-group" id='mails_list'>
+            <div class="list-group-item list-group-item-action flex-column align-items-start"
+                 id='link'>
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1" id='header'>{{ message.fromUserMail }}</h5>
+                    <small class="text-muted" id='date'>{{ message.date }}</small>
+                </div>
+                <p class="mb-1" id='text'>{{ message.htmlBody | safe }}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
